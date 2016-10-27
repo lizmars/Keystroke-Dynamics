@@ -1,4 +1,5 @@
 import json
+import sqlite3
 
 class Digraph:
     def __init__(self):
@@ -49,6 +50,12 @@ class Etalon:
                     self.keylog[key][1] = (float(value - self.keylog[key][0]) ** 2) / float(self.keylog[key][2] - 1)
                 else:
                     self.keylog[key] = [value, "0", "1"]
+    def getitems(self):
+        return self.keylog.items()
+    def getkeys(self):
+        return self.keylog.keys()
+    def getvalues(self):
+        return self.keylog.values()
 
     def printEtalon(self):
         for item in self.keylog.items():
@@ -61,37 +68,50 @@ class Profile:
     def createProfile(self, username, rawdata):
         self.profilelist[username] = Etalon()
         self.profilelist[username].addToEtalon(rawdata)
+        return self.profilelist
 
     def printProfile(self):
         for item in self.profilelist.items():
             print item[0]
             item[1].printEtalon()
 
+def getpostdata():
+    with open("postreq.json", 'r') as f:
+        postdata = f.read()
+    rawinput = json.loads(postdata)
+    username = "".join(rawinput.keys())
+    rdata = []
+    for item in rawinput[username]:
+        values = item.values()
+        keylog = values[0].split(",")
+        timelog = values[1].split(",")
+        for i in xrange(len(keylog)):
+            rdata.append([keylog[i],timelog[i]])
+    return username, rdata
 
-#user = "Yuliia"
-rinput = [["40", "1", "0.02"],["40", "0", "0.025"], ["23", "1", "0.029"],
-            ["23", "0", "0.02299"], ["33",'1','0.03'], ["33",'0','0.04'],
-            ["40", "1", "0.04006"],["40", "0", "0.05004"],["40", "1", "0.04126"],
-            ["40", "0", "0.01052306"],["33",'1','0.03634'],["33",'0','0.0400032'],
-            ["23", "0", "0.02299"], ["33",'1','0.03'], ["33",'0','0.04']]
+def pushtosql(prof):
+    conn = sqlite3.connect('keystroke.sqlite')
+    cur = conn.cursor()
+
+    #cur.execute('''
+    #DROP TABLE IF EXISTS Users''')
+
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS Users (user TEXT, digraph_id INTEGER, expected_value REAL, variance REAL, frequency INTEGER)''')
+    uname = "".join(prof.keys())
+    keys = prof["".join(prof.keys())].getkeys()
+    values = prof["".join(prof.keys())].getvalues()
+    for i in xrange(len(keys)):
+        cur.execute('''INSERT INTO Users (user, digraph_id, expected_value, variance, frequency)
+        VALUES ( ?, ?, ?, ?, ? )''', (uname, keys[i], values[i][0], values[i][1], values[i][2]))
+    conn.commit()
 
 myprofile = Profile()
 
-with open("postreq.json", 'r') as f:
-    postdata = f.read()
+user, data = getpostdata()
 
-rawinput = json.loads(postdata)
-user = "".join(rawinput.keys())
-print user
-data = []
-for item in rawinput[user]:
-    values = item.values()
-    keylog = values[0].split(",")
-    timelog = values[1].split(",")
-    for i in xrange(len(keylog)):
-        #print values[0][i]
-        data.append([keylog[i],timelog[i]])
-#print data
+user_profile = myprofile.createProfile(user, data)
 
-myprofile.createProfile(user, data)
-myprofile.printProfile()
+pushtosql(user_profile)
+
+#myprofile.printProfile()
