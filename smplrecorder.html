@@ -1,30 +1,102 @@
 <!DOCTYPE html>
 <html>
+<title>Keystroke Dynamics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
+<body style="background-color:rgb(200,200,200)">
 
-<body>
+<div class="w3-container w3-blue-grey">
+  <div class="w3-btn-group w3-display-topright">
+    <a class="w3-btn w3-dark-grey " href="#">ENG</a>
+    <a class="w3-btn w3-disable " href="#">RU</a>
+    <a class="w3-btn w3-disable " href="#">UA</a>
+  </div>
+  <h1>Keystroke Dynamics</h1>
+</div>
 
-<h1>Simple keystroke recorder</h1>
-<p>1. Type user name in field below.</p>
+<div class="w3-container">
+  <ul class="w3-navbar w3-dark-grey">
+    <li><a href="javascript:void(0)" onclick="openTab('Home')">Home</a></li>
+    <li><a href="javascript:void(0)" onclick="openTab('Create Profile')">Create Profile</a></li>
+    <li><a href="javascript:void(0)" onclick="openTab('Authentication')">Authentication</a></li>
+    <li><a href="javascript:void(0)" onclick="openTab('Contact us')">Contact us</a></li>
+    <li><a href="javascript:void(0)" onclick="openTab('About us')">About us</a></li>
+  </ul>
 
-Usrname:
-<input type="text" id="userID"></input>
+  <div id="Home" class="w3-container tab w3-padding-8 w3-light-grey">
+    <h2>About our project</h2>
+    <p></p>
+    <h2>What is Kystroke Dynamics?</h2>
+    <p><b>Keystroke dynamics</b>, keystroke biometrics or typing dynamics, is the
+      detailed timing information that describes exactly when each key was
+      pressed and when it was released as a person is typing at a computer
+      keyboard.
+    </p>
+    <p>The behavioral biometric of Keystroke Dynamics uses the manner and
+      rhythm in which an individual types characters on a keyboard or keypad.
+      The keystroke rhythms of a user are measured to develop a unique b
+      iometric template of the user's typing pattern for future authentication.
+      Raw measurements available from almost every keyboard can be recorded
+      to determine Dwell time (the time a key pressed) and Flight time (the
+      time between "key up" and the next "key down"). The recorded keystroke
+      timing data is then processed through a unique neural algorithm, which
+      determines a primary pattern for future comparison.[6] Similarly,
+      vibration information may be used to create a pattern for future use
+      in both identification and authentication tasks.
+    </p>
+    <h2>How it works?</h2>
+    <h2>What we wnat from our users?</h2>
+    <h2>What you can get from our project?</h2>
 
-<p>2. Start typing text below. When you finish, hit "Submit" button.</p>
 
-Type your text here:
-<br>
-<textarea id="myTextarea" rows="4" cols="50" onkeydown="keydown()" onkeyup="keyup()"></textarea>
-<br>
-<button type="button" onclick="submit()">Submit</button>
+  </div>
+
+  <div id="Create Profile" class="w3-container tab w3-center w3-padding-8">
+    <h1>Simple keystroke recorder</h1>
+    <div class="w3-center">
+      <h3> Create user name<h3>
+      <h4>Usrname:</h4>
+      <input type="text" id="userID"></input>
+      <h3> Start typing text below. </h3>
+
+      <textarea id="keysrec" rows="10" cols="100" onkeydown="keydown()" onkeyup="keyup()"></textarea>
+
+      <div class="w3-section">
+        <button id="sub" type="button" onclick="submit()" class="w3-btn-block w3-dark-grey" style="width:30%">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="Authentication" class="w3-container tab">
+    <h2>Coming soon...</h2>
+  </div>
+  <div id="Contact us" class="w3-container tab">
+    <h2>Coming soon...</h2>
+  </div>
+  <div id="About us" class="w3-container tab">
+    <h2>Coming soon...</h2>
+  </div>
+
+
+
+</div>
 
 <script>
 var keylog = [];
 var timelog = [];
 var username
-
+openTab("Home")
+function openTab(tabName) {
+    var i;
+    var x = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+}
 function keydown(){
   keylog.push(event.keyCode + "1");
   timelog.push(event.timeStamp);
@@ -46,12 +118,31 @@ function submit() {
   timelog.toString()
   document.getElementById("out_times").innerHTML = timelog;
   document.getElementById("out_user").innerHTML = username;
+
+  var parameters = '{ "' + username + '" : [' +
+  '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
+
+  $(document).ready(function(){
+          $.post("http://127.0.0.1:8080",
+          parameters,
+          function(data,status){
+              alert("Data: " + data + "\nStatus: " + status);
+          }, "json");
+      });
 }
+
+
+
 
 </script>
 <p id="out_user"></p>
 <p id="out_keys"></p>
 <p id="out_times"></p>
+
+<footer class="w3-container w3-blue-grey w3-center">
+  <h5>Footer</h5>
+  <p>Footer information goes here</p>
+</footer>
 
 </body>
 </html>
