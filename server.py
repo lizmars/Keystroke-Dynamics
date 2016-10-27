@@ -1,10 +1,15 @@
 from bottle import run, request, post
+import subprocess
+import os
 
 @post('/')
 def index():
     postdata = request.body.readlines()
-    for line in postdata:
-        print line
+    with open("postreq.json", "w") as f:
+        for line in postdata:
+            #print line
+            f.write(line)
+    os.system("python profile.py")
     return "OK"
 
 if __name__ == "__main__":
