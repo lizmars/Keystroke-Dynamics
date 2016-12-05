@@ -148,7 +148,7 @@ div.ex {
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
       <h3> Step 1. Enter username you created <h3>
       <h4>Username:</h4>
-      <input type="text" id="userID"></input>
+      <input type="text" id="userIDauth"></input>
       <div class="w3-section">
         <button id="nextstep" type="button"  href="javascript:void(0)" onclick="openTab('AuthStep2')"
         class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px">Next Step</button>
@@ -165,12 +165,13 @@ div.ex {
       <h3> Step 2. Type the phrase below.</h3>
       <h4>Start typing text below. Don't worry, small typo is ok</h4>
       <div class="w3-panel w3-pale-green w3-leftbar w3-border-green ">
-        NOTE: Content of your typing may be whatever you want OR use sample given below. Length is unlimited. You can stop anytime by hitting "I am done" button.
+        NOTE: Content of your typing may be whatever you want OR use sample given below.
+        Length is unlimited. You can stop anytime by hitting "I'm done" button.
       </div>
       <div class="ex" >
         <p> Start typing text below. </p>
       </div>
-        <textarea id="keysrec" onkeydown="keydown()" onkeyup="keyup()" style="width: 770px; height: 150px;"></textarea>
+        <textarea id="keysrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" style="width: 770px; height: 150px;"></textarea>
 
       <div class="w3-section">
         <button id="done" type="button" onclick="openTab('AEnd')" class="w3-btn-block w3-dark-grey w3-round-large"
@@ -185,7 +186,7 @@ div.ex {
     </div>
     <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
       <div class="w3-section">
-        <h4>We hope you enjoyed your time on our website. Thanks you for participation.</h4>
+        <h4>We hope you enjoyed your time on our website. Thank you for participation.</h4>
         <h3>Share your feedback and stay in touch</h3>
         <input type="button" class="w3-btn" value="Input Button">
         <button class="w3-btn">Button Button</button>
@@ -224,7 +225,7 @@ function openTab(tabName) {
 <p id="out_times"></p>
 
 <footer class="w3-container w3-blue-grey w3-center">
-  <p>Author Yuliia Synytsia</p>
+  <p></p>
 </footer>
 
 </body>

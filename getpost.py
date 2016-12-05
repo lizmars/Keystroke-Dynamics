@@ -1,7 +1,7 @@
 import json
 
-def get_post_data():
-    with open("postreq.json", 'r') as f:
+def get_post_data(postfile):
+    with open(postfile, 'r') as f:
         postdata = f.read()
     rawinput = json.loads(postdata)
     username = "".join(rawinput.keys())
@@ -14,8 +14,8 @@ def get_post_data():
             rdata.append([keylog[i],timelog[i]])
     return username, rdata
 
-def get_postAuth_data():
-    with open("postreq.json", 'r') as f:
+def get_postAuth_data(postfile):
+    with open(postfile, 'r') as f:
         postdata = f.read()
     rawinput = json.loads(postdata)
     username = "".join(rawinput.keys())

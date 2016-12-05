@@ -2,6 +2,8 @@ import json
 import sqlite3
 import digraph
 import getpost
+import sys
+import os
 
 class Etalon:
     def __init__(self):
@@ -16,7 +18,7 @@ class Etalon:
                 if self.keylog.has_key(key):
                     self.keylog[key][2] = int(self.keylog.get(key)[2]) + 1
                     self.keylog[key][0] = float(self.keylog[key][0] + value) / float(self.keylog[key][2])
-                    self.keylog[key][1] = (float(value - self.keylog[key][0]) ** 2) / float(self.keylog[key][2] - 1)
+                    self.keylog[key][1] = float((value - self.keylog[key][0]) ** 2) / float(self.keylog[key][2] - 1)
                 else:
                     self.keylog[key] = [value, "0", "1"]
     def getitems(self):
@@ -78,11 +80,13 @@ def push_to_sql(prof):
 
 
 myprofile = Profile()
-
-user, data = getpost.get_post_data()
+postfile = sys.argv[1]
+user, data = getpost.get_post_data(postfile)
 if not is_table_exists(user):
     print "User already exists"
 
 user_profile = myprofile.createProfile(user, data)
-push_to_sql(user_profile)
+if push_to_sql(user_profile):
+    os.remove(postfile)
+
 myprofile.printProfile()
