@@ -33,25 +33,17 @@ function keyupAuth(){
 function submit() {
   username = document.getElementById("userID").value;
   keylog.toString();
-  document.getElementById("out_keys").innerHTML = keylog;
+
   s = timelog[0]/1000.0;
   for(i = 0; i < timelog.length; i++ ){
     timelog[i] = (timelog[i]/1000.0) - s;
   }
   timelog.toString()
-  document.getElementById("out_times").innerHTML = timelog;
-  document.getElementById("out_user").innerHTML = username;
+
 
   var parameters = '{ "' + username + '" : [' +
   '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
 
-  /*$(document).ready(function(){
-          $.post("http://127.0.0.1:8080",
-          parameters,
-          function(data,status){
-              alert("Data: " + data + "\nStatus: " + status);
-          }, "json");
-      });*/
       $.ajax({
           url: 'http://127.0.0.1:8080',
           headers: {
@@ -60,10 +52,19 @@ function submit() {
               'Content-Type':'application/json'
           },
           method: 'POST',
-          dataType: 'json',
+          //dataType: 'json',
           data: parameters,
-          success: function(data){
-            console.log('succes: '+data);
+          success: function(result){
+            document.getElementById("sub").disabled = true;
+            document.getElementById("keysrec").value = "";
+            if (result == "True") {
+               document.getElementById("CPEnd").style.display = "block"
+            }
+            else {
+              document.getElementById("CPError").style.display = "block"
+            }
+
+
           }
         });
   keylog = [];
@@ -99,5 +100,77 @@ function auth(){
       }
     });
   delete param;
+
+}
+
+function checkname(){
+ var name=document.getElementById( "userID" ).value;
+
+ if(name){
+   $.ajax({
+       url: 'http://127.0.0.1:8080',
+       headers: {
+           'Type':'is_in_DB',
+           'User': name,
+       },
+       method: 'POST',
+       dataType: 'text',
+       success: function(response){
+         //window.alert(response)
+         document.getElementById("name_status").style.display = "block"
+         if (response == "OK"){
+           document.getElementById("name_status").style.color = "green"
+           document.getElementById("name_status").innerHTML = "Good Username";
+           document.getElementById("nexstep").disabled = false;
+         }
+         else {
+           document.getElementById("name_status").style.color = "red"
+           document.getElementById("name_status").innerHTML = response;
+           document.getElementById("nexstep").disabled = true;
+         }
+
+       }
+     });
+ }
+ else{
+  $( '#name_status' ).html("");
+  return false;
+ }
+
+}
+
+function checknameA(){
+ var name=document.getElementById( "userIDauth" ).value;
+
+ if(name){
+   $.ajax({
+       url: 'http://127.0.0.1:8080',
+       headers: {
+           'Type':'is_in_DB',
+           'User': name,
+       },
+       method: 'POST',
+       dataType: 'text',
+       success: function(response){
+         //window.alert(response)
+         document.getElementById("name_status_Auth").style.display = "block"
+         if (response == "OK"){
+           document.getElementById("name_status_Auth").style.color = "red"
+           document.getElementById("name_status_Auth").innerHTML = "Username is not found. Please enter valid User Name";
+           document.getElementById("nextstep").disabled = true;
+         }
+         else {
+           document.getElementById("name_status_Auth").style.color = "green"
+           document.getElementById("name_status_Auth").innerHTML = "Username Exist";
+           document.getElementById("nextstep").disabled = false;
+         }
+
+       }
+     });
+ }
+ else{
+  $( '#name_status' ).html("");
+  return false;
+ }
 
 }

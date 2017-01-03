@@ -84,9 +84,11 @@ div.ex {
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
       <h3> Step 1. Create unique username<h3>
       <h4>Username:</h4>
-      <input type="text" id="userID"></input>
+      <h6><span id="name_status" ></span></h6>
+      <input type="text" id="userID" onkeyup="checkname();"></input>
+
       <div class="w3-section">
-        <button id="nexstep" type="button" a href="javascript:void(0)" onclick="openTab('CPStep2')"
+        <button id="nexstep" type="button" a href="javascript:void(0)" onclick="openTab('CPStep2');clearContent();"
         class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px">Next Step</button>
       </div>
     </div>
@@ -108,7 +110,7 @@ div.ex {
         style="width: 770px; height: 150px;"></textarea>
 
       <div class="w3-section">
-        <button id="sub" type="button" onclick="submit();openTab('CPEnd')" class="w3-btn-block
+        <button id="sub" type="button" onclick="submit();" class="w3-btn-block
         w3-dark-grey w3-round-large" style="width:30%">Submit</button>
       </div>
     </div>
@@ -147,10 +149,10 @@ div.ex {
     </div>
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
       <h3> Step 1. Enter username you created <h3>
-      <h4>Username:</h4>
-      <input type="text" id="userIDauth"></input>
+      <h6><span id="name_status_Auth" ></span></h6>
+      <input type="text" id="userIDauth" onkeyup="checknameA();"></input>
       <div class="w3-section">
-        <button id="nextstep" type="button"  href="javascript:void(0)" onclick="openTab('AuthStep2')"
+        <button id="nextstep" type="button"  href="javascript:void(0)" onclick="openTab('AuthStep2');clearContent();"
         class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px">Next Step</button>
       </div>
     </div>
@@ -217,12 +219,22 @@ function openTab(tabName) {
     }
     document.getElementById(tabName).style.display = "block";
 }
+
+function clearContent(){
+  if (document.getElementById("userID").value.length != 0 ) {
+    document.getElementById("userID").value = ""
+    document.getElementById("name_status").style.display = "none"
+  }
+  if (document.getElementById("userIDauth").value.length != 0 ) {
+    document.getElementById("userIDauth").value = ""
+    document.getElementById("name_status_Auth").style.display = "none"
+  }
+
+
+}
 </script>
 <script src="keycapture.js"></script>
 
-<p id="out_user"></p>
-<p id="out_keys"></p>
-<p id="out_times"></p>
 
 <footer class="w3-container w3-blue-grey w3-center">
   <p></p>
