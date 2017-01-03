@@ -15,7 +15,7 @@ function keyup(){
 function keydownAuth(){
   keylog.push(event.keyCode + "1");
   timelog.push(event.timeStamp);
-  if ((keylog.length%150 == 0) && (timelog.length%150 == 0)){
+  if ((keylog.length%40 == 0) && (timelog.length%40 == 0)){
     auth();
   }
 
@@ -24,14 +24,15 @@ function keydownAuth(){
 function keyupAuth(){
   keylog.push(event.keyCode + "0");
   timelog.push(event.timeStamp);
-  if ((keylog.length%150 == 0) && (timelog.length%150 == 0)){
+  if ((keylog.length%40 == 0) && (timelog.length%40 == 0)){
     auth();
   }
 }
 
 
 function submit() {
-  username = document.getElementById("userID").value;
+  username = $("#placehold").text();
+
   keylog.toString();
 
   s = timelog[0]/1000.0;
@@ -72,16 +73,16 @@ function submit() {
 }
 
 function auth(){
-  username = document.getElementById("userIDauth").value;
+  username = $("#placehld").text();
   keylog.toString();
-  document.getElementById("out_keys").innerHTML = keylog;
+  //document.getElementById("out_keys").innerHTML = keylog;
   s = timelog[0]/1000.0;
   for(i = 0; i < timelog.length; i++ ){
     timelog[i] = (timelog[i]/1000.0) - s;
   }
   timelog.toString();
-  document.getElementById("out_times").innerHTML = timelog;
-  document.getElementById("out_user").innerHTML = username;
+  //document.getElementById("out_times").innerHTML = timelog;
+  //document.getElementById("out_user").innerHTML = username;
 
   param = '{ "' + username + '" : [' +
   '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
@@ -93,10 +94,27 @@ function auth(){
           'Content-Type':'application/json'
       },
       method: 'POST',
-      dataType: 'json',
       data: param,
-      success: function(data){
-        console.log('succes: '+data);
+      success: function(result){
+
+
+        document.getElementById("result").style.display = "block"
+        if (result == "Wait") {
+          document.getElementById("result").style.color = "blue"
+        }
+        var res = result.split(" ")
+        //document.getElementById("result").innerHTML = res[1]
+        switch (res[1]) {
+          case "Permitted:":
+            document.getElementById("result").style.color = "green"
+            break;
+          case "Denied:":
+            document.getElementById("result").style.color = "red"
+            break;
+
+        }
+
+          document.getElementById("result").innerHTML = result
       }
     });
   delete param;
@@ -105,6 +123,10 @@ function auth(){
 
 function checkname(){
  var name=document.getElementById( "userID" ).value;
+ if (document.getElementById( "userID" ).value.length == 0){
+   document.getElementById("nexstep").disabled = true;
+ }
+
 
  if(name){
    $.ajax({
@@ -141,6 +163,9 @@ function checkname(){
 
 function checknameA(){
  var name=document.getElementById( "userIDauth" ).value;
+ if (document.getElementById( "userIDauth" ).value.length == 0){
+   document.getElementById("nextstep").disabled = true;
+ }
 
  if(name){
    $.ajax({

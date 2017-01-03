@@ -89,7 +89,7 @@ div.ex {
 
       <div class="w3-section">
         <button id="nexstep" type="button" a href="javascript:void(0)" onclick="openTab('CPStep2');clearContent();"
-        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px">Next Step</button>
+        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled>Next Step</button>
       </div>
     </div>
   </div>
@@ -98,9 +98,10 @@ div.ex {
     <div class="w3-panel w3-teal w3-card-8 w3-round-xlarge" style="width: 800px;margin:auto;">
       <h1>Keystroke Recorder</h1>
     </div>
+
     <div class="w3-panel w3-center w3-light-grey w3-card-4"
          style="width: 850px;margin:auto;">
-
+      <h5> Hello, <b><span id="placehold" style="color:blue"></span></b>, please follow instructions below</h5>
       <h3> Step 2. Start typing the text below.</h3>
       <h4>When you finished hit "Submit" button</h4>
       <div class="ex" >
@@ -110,7 +111,7 @@ div.ex {
         style="width: 770px; height: 150px;"></textarea>
 
       <div class="w3-section">
-        <button id="sub" type="button" onclick="submit();" class="w3-btn-block
+        <button id="sub" type="button" onclick="submit();cleartextarea();" class="w3-btn-block
         w3-dark-grey w3-round-large" style="width:30%">Submit</button>
       </div>
     </div>
@@ -153,7 +154,7 @@ div.ex {
       <input type="text" id="userIDauth" onkeyup="checknameA();"></input>
       <div class="w3-section">
         <button id="nextstep" type="button"  href="javascript:void(0)" onclick="openTab('AuthStep2');clearContent();"
-        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px">Next Step</button>
+        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled>Next Step</button>
       </div>
     </div>
 
@@ -164,6 +165,7 @@ div.ex {
       <h1>Authentication</h1>
     </div>
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 850px;margin:auto;">
+      <h5> Authentication for <b><span id="placehld" style="color:blue"></span></b></h5>
       <h3> Step 2. Type the phrase below.</h3>
       <h4>Start typing text below. Don't worry, small typo is ok</h4>
       <div class="w3-panel w3-pale-green w3-leftbar w3-border-green ">
@@ -173,10 +175,10 @@ div.ex {
       <div class="ex" >
         <p> Start typing text below. </p>
       </div>
-        <textarea id="keysrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" style="width: 770px; height: 150px;"></textarea>
-
+        <textarea id="keyrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" style="width: 770px; height: 150px;"></textarea>
+        <h3><div id="result"  class="w3-panel w3-margin w3-opacity w3-round"></div><b></b></h3>
       <div class="w3-section">
-        <button id="done" type="button" onclick="openTab('AEnd')" class="w3-btn-block w3-dark-grey w3-round-large"
+        <button id="done" type="button" onclick="openTab('AEnd');" class="w3-btn-block w3-dark-grey w3-round-large"
         style="width:30%">I'm done</button>
       </div>
     </div>
@@ -222,13 +224,19 @@ function openTab(tabName) {
 
 function clearContent(){
   if (document.getElementById("userID").value.length != 0 ) {
+    document.getElementById("placehold").innerHTML = document.getElementById("userID").value
     document.getElementById("userID").value = ""
     document.getElementById("name_status").style.display = "none"
+    document.getElementById("nexstep").disabled = true
   }
+
   if (document.getElementById("userIDauth").value.length != 0 ) {
+    document.getElementById("placehld").innerHTML = document.getElementById("userIDauth").value
     document.getElementById("userIDauth").value = ""
     document.getElementById("name_status_Auth").style.display = "none"
+    document.getElementById("nextstep").disabled = true
   }
+
 
 
 }
