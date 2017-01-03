@@ -1,6 +1,7 @@
 import digraph
 import sqlite3
 import getpost
+import os
 import sys
 import math
 
@@ -10,7 +11,7 @@ class Auth:
 
     def authentication(self, user, data):
         V = 0
-        print "For ", user
+        print "For ", user, "  V = ", V, " data length: ", len(data)
         for item in data:
             key, value = self.temp.add(item)
             if key is not None and value is not None:
@@ -32,11 +33,13 @@ class Auth:
         if mV <= 0.5:
             print "Access Denied", mV, " <= ", 0.5
             V = 0
-            return True
+            return "Access Denied: " + str(mV) + " <= " + str(0.5)
+            #return "Access Denied"
         elif mV >= 0.6:
             print "Access Permitted", mV, " >= ", 0.6
             V = 0
-            return False
+            return "Access Permitted: " + str(mV) + " >= " + str(0.6)
+            #return "Access Permitted"
         else:
             return "Wait"
 
@@ -74,12 +77,11 @@ class Auth:
         else:
             return False
 
-
-bioAuth = Auth()
-postfile = sys.argv[1]
-#postfile = "Auth_CitrixPOST.json"
-user, data = getpost.get_postAuth_data(postfile)
-if bioAuth.authentication(user, data) == "Wait":
-    pass
-else:
-    os.remove(postfile)
+def start_auth(postfile):
+    bioAuth = Auth()
+    #postfile = "Auth_CitrixPOST.json"
+    user, data = getpost.get_postAuth_data(postfile)
+    result = bioAuth.authentication(user, data)
+    if result != "Wait":
+        os.remove(postfile)
+    return result

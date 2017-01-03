@@ -68,7 +68,7 @@ def push_to_sql(prof):
         return False
 
     cur.execute('''
-    CREATE TABLE IF NOT EXISTS ''' + table +'''(digraph_id INTEGER, expected_value REAL, variance REAL, frequency INTEGER)''')
+    CREATE TABLE IF NOT EXISTS ''' + table +''' (digraph_id INTEGER, expected_value REAL, variance REAL, frequency INTEGER)''')
     keys = prof["".join(prof.keys())].getkeys()
     values = prof["".join(prof.keys())].getvalues()
     for i in xrange(len(keys)):
@@ -78,15 +78,14 @@ def push_to_sql(prof):
     cur.close()
     return True
 
+def new_profile(postfile):
+    myprofile = Profile()
+    #postfile = sys.argv[1]
+    user, data = getpost.get_post_data(postfile)
 
-myprofile = Profile()
-postfile = sys.argv[1]
-user, data = getpost.get_post_data(postfile)
-if not is_table_exists(user):
-    print "User already exists"
-
-user_profile = myprofile.createProfile(user, data)
-if push_to_sql(user_profile):
-    os.remove(postfile)
-
-myprofile.printProfile()
+    user_profile = myprofile.createProfile(user, data)
+    if push_to_sql(user_profile):
+        os.remove(postfile)
+        return True
+    else:
+        return False
