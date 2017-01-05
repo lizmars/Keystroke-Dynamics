@@ -8,11 +8,40 @@
 </head>
 
 <style>
-div.ex {
+#ex {
     width: 770px;
-    height: 50px;
+    height: 170px;
     background-color: lightgrey;
     margin: auto;
+    text-align: left;
+}
+p {
+  text-indent: 20px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0.3cm;
+  margin-right: 0.4cm;
+  color: #404040;
+}
+textarea {
+  width: 770px;
+  height: 180px;"
+}
+#Progress {
+    position: relative;
+    width: 770px;
+    height: 10px;
+    background-color: #b3b3b3;
+    margin: auto;
+
+}
+#Bar {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: green;
+    margin: auto;
+
 }
 </style>
 
@@ -85,7 +114,7 @@ div.ex {
       <h3> Step 1. Create unique username<h3>
       <h4>Username:</h4>
       <h6><span id="name_status" ></span></h6>
-      <input type="text" id="userID" onkeyup="checkname();"></input>
+      <input type="text" id="userID" onkeyup="checkname();"autofocus></input>
 
       <div class="w3-section">
         <button id="nexstep" type="button" a href="javascript:void(0)" onclick="openTab('CPStep2');clearContent();"
@@ -101,14 +130,36 @@ div.ex {
 
     <div class="w3-panel w3-center w3-light-grey w3-card-4"
          style="width: 850px;margin:auto;">
-      <h5> Hello, <b><span id="placehold" style="color:blue"></span></b>, please follow instructions below</h5>
+      <h5> Hello, <b><span id="placehold" style="color:blue"></span></b>,
+        please follow instructions below</h5>
       <h3> Step 2. Start typing the text below.</h3>
       <h4>When you finished hit "Submit" button</h4>
-      <div class="ex" >
-        <p> Start typing text below. </p>
+      <div id="ex" >
+        <p> A long time ago, in a galaxy far, far away...
+            It is a period of civil war. Rebel
+            spaceships, striking from a hidden
+            base, have won their first victory
+            against the evil Galactic Empire.
+            During the battle, Rebel spies managed
+            to steal secret plans to the Empire's
+            ultimate weapon, the Death Star, an
+            armored space station with enough
+            power to destroy an entire planet.
+            Pursued by the Empire's sinister agents,
+            Princess Leia races home aboard her
+            starship, custodian of the stolen plans
+            that can save her people and restore
+            freedom to the galaxy....  <br>
+            <b>May the Force be with you.</b> </p>
       </div>
-        <textarea id="keysrec" onkeydown="keydown()" onkeyup="keyup()"
-        style="width: 770px; height: 150px;"></textarea>
+      <textarea id="keysrec" onkeydown="keydown();move();" onkeyup="keyup();move();" autofocus></textarea>
+
+      <div id="Progress">
+        <div id="Bar" ></div>
+      </div>
+      <div id="alert" class="w3-panel w3-margin w3-opacity w3-round" hidden>
+        That's enough statistics to create your profile. You can stop now and
+        submit your profile or continue typing.</div>
 
       <div class="w3-section">
         <button id="sub" type="button" onclick="submit();cleartextarea();" class="w3-btn-block
@@ -151,7 +202,7 @@ div.ex {
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
       <h3> Step 1. Enter username you created <h3>
       <h6><span id="name_status_Auth" ></span></h6>
-      <input type="text" id="userIDauth" onkeyup="checknameA();"></input>
+      <input type="text" id="userIDauth" onkeyup="checknameA();" autofocus></input>
       <div class="w3-section">
         <button id="nextstep" type="button"  href="javascript:void(0)" onclick="openTab('AuthStep2');clearContent();"
         class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled>Next Step</button>
@@ -172,10 +223,21 @@ div.ex {
         NOTE: Content of your typing may be whatever you want OR use sample given below.
         Length is unlimited. You can stop anytime by hitting "I'm done" button.
       </div>
-      <div class="ex" >
-        <p> Start typing text below. </p>
+      <div id = "ex" >
+        <p> A long time ago, in a galaxy far, far away...
+          It is a dark time for the Rebellion.
+          Although the Death Star has been destroyed,
+          Imperial troops have driven the Rebel forces
+          from their hidden base and pursued them across
+          the galaxy. Evading the dreaded Imperial Starfleet,
+          a group of freedom fighters led by Luke Skywalker
+          has established a new secret base on the remote ice
+          world of Hoth. The evil lord Darth Vader, obsessed
+          with finding young Skywalker, has dispatched thousands
+          of remote probes into the far reaches of space...<br>
+          <b>May the Force be with you.</b> </p>
       </div>
-        <textarea id="keyrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" style="width: 770px; height: 150px;"></textarea>
+        <textarea id="keyrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" autofocus></textarea>
         <h3><div id="result"  class="w3-panel w3-margin w3-opacity w3-round"></div><b></b></h3>
       <div class="w3-section">
         <button id="done" type="button" onclick="openTab('AEnd');" class="w3-btn-block w3-dark-grey w3-round-large"
@@ -199,9 +261,6 @@ div.ex {
     </div>
   </div>
 
-
-
-
   <div id="Contact us" class="w3-container tab">
     <h2>Coming soon...</h2>
   </div>
@@ -220,25 +279,6 @@ function openTab(tabName) {
        x[i].style.display = "none";
     }
     document.getElementById(tabName).style.display = "block";
-}
-
-function clearContent(){
-  if (document.getElementById("userID").value.length != 0 ) {
-    document.getElementById("placehold").innerHTML = document.getElementById("userID").value
-    document.getElementById("userID").value = ""
-    document.getElementById("name_status").style.display = "none"
-    document.getElementById("nexstep").disabled = true
-  }
-
-  if (document.getElementById("userIDauth").value.length != 0 ) {
-    document.getElementById("placehld").innerHTML = document.getElementById("userIDauth").value
-    document.getElementById("userIDauth").value = ""
-    document.getElementById("name_status_Auth").style.display = "none"
-    document.getElementById("nextstep").disabled = true
-  }
-
-
-
 }
 </script>
 <script src="keycapture.js"></script>
