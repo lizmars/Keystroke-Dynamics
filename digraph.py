@@ -19,7 +19,7 @@ class Digraph:
         else:
             return None, None
 
-    def add(self,keyinput): #keyinput = [key+action,value]
+    def add(self,keyinput): #keyinput = [[key+action,value],[],[]]
             self.temp.insert(0,keyinput) #insert keyinput to a queue.
             if len(self.temp) == 2:
                 act1 = self.temp.pop() # take away first value and store 2 others for next digraph
