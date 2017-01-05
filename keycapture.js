@@ -2,7 +2,20 @@ var keylog = [];
 var timelog = [];
 var username;
 
+function move(){
+  if (keylog.length <= 770) {
+    var width = keylog.length;
+    document.getElementById("Bar").style.width = width +  'px';
+  }
+  else{
+    document.getElementById("alert").style.display = "block";
+  }
+}
+
 function keydown(){
+  if (document.getElementById("sub").disabled){
+    document.getElementById("sub").disabled = false
+  }
   keylog.push(event.keyCode + "1");
   timelog.push(event.timeStamp);
 }
@@ -32,48 +45,56 @@ function keyupAuth(){
 
 function submit() {
   username = $("#placehold").text();
+  //document.getElementById("sub").disabled = true
 
-  keylog.toString();
+  if (document.getElementById("keysrec").value.length != 0){ //if text area is not empty start process
 
-  s = timelog[0]/1000.0;
-  for(i = 0; i < timelog.length; i++ ){
-    timelog[i] = (timelog[i]/1000.0) - s;
+    keylog.toString();
+    s = timelog[0]/1000.0;
+    for(i = 0; i < timelog.length; i++ ){
+      timelog[i] = (timelog[i]/1000.0) - s;
+    }
+    timelog.toString()
+    var parameters = '{ "' + username + '" : [' +
+    '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
+
+        $.ajax({
+            url: 'http://127.0.0.1:8080',
+            headers: {
+                'Type':'Create_Profile',
+                'User':username,
+                'Content-Type':'application/json'
+            },
+            method: 'POST',
+            //dataType: 'json',
+            data: parameters,
+            success: function(result){
+              document.getElementById("sub").disabled = true;
+              document.getElementById("keysrec").value = "";
+              if (result == "True") {
+                 document.getElementById("CPEnd").style.display = "block"
+                 document.getElementById("beginauth").focus();
+                 document.getElementById("sub").disabled = true
+              }
+              else {
+                document.getElementById("CPError").style.display = "block"
+              }
+            }
+          });
+    keylog = [];
+    timelog = [];
+
+    document.getElementById("keysrec").value = ""
+    document.getElementById("placehold").value = ""
   }
-  timelog.toString()
-
-
-  var parameters = '{ "' + username + '" : [' +
-  '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
-
-      $.ajax({
-          url: 'http://127.0.0.1:8080',
-          headers: {
-              'Type':'Create_Profile',
-              'User':username,
-              'Content-Type':'application/json'
-          },
-          method: 'POST',
-          //dataType: 'json',
-          data: parameters,
-          success: function(result){
-            document.getElementById("sub").disabled = true;
-            document.getElementById("keysrec").value = "";
-            if (result == "True") {
-               document.getElementById("CPEnd").style.display = "block"
-            }
-            else {
-              document.getElementById("CPError").style.display = "block"
-            }
-
-
-          }
-        });
-  keylog = [];
-  timelog = [];
+  else {
+    alert("Enter some text first") //if texarea is empty
+  }
 }
 
 function auth(){
   username = $("#placehld").text();
+
   keylog.toString();
   //document.getElementById("out_keys").innerHTML = keylog;
   s = timelog[0]/1000.0;
@@ -96,7 +117,6 @@ function auth(){
       method: 'POST',
       data: param,
       success: function(result){
-
 
         document.getElementById("result").style.display = "block"
         if (result == "Wait") {
@@ -198,4 +218,32 @@ function checknameA(){
   return false;
  }
 
+}
+
+function clearContent(){
+  if (username != $("#placehold").text()){
+    keylog = [];
+    timelog = [];
+    document.getElementById("Bar").style.width = 1 + "px"
+  }
+  if (document.getElementById("userID").value.length != 0 ) {
+    document.getElementById("placehold").innerHTML = document.getElementById("userID").value
+    document.getElementById("userID").value = ""
+    document.getElementById("name_status").style.display = "none"
+    document.getElementById("nexstep").disabled = true
+  }
+  if (document.getElementById("keysrec").value.length != 0 ) {
+    document.getElementById("keysrec").value = ""
+  }
+  if (document.getElementById("keyrec").value.length != 0 ) {
+    document.getElementById("keyrec").value = ""
+    document.getElementById("result").style.display = "none"
+  }
+
+  if (document.getElementById("userIDauth").value.length != 0 ) {
+    document.getElementById("placehld").innerHTML = document.getElementById("userIDauth").value
+    document.getElementById("userIDauth").value = ""
+    document.getElementById("name_status_Auth").style.display = "none"
+    document.getElementById("nextstep").disabled = true
+  }
 }
