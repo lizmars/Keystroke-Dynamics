@@ -1,10 +1,26 @@
-from bottle import run, request, post
+from bottle import run, request, post, hook, response, route
 import os
 import json
 import subprocess
 import checkname
 import profile
 import auth
+
+_allow_origin = '*'
+_allow_methods = 'PUT, GET, POST, DELETE, OPTIONS'
+_allow_headers = 'Authorization, Origin, Accept, Content-Type, Type, User'
+
+@hook('after_request')
+def enable_cors():
+    response.headers['Access-Control-Allow-Origin'] = _allow_origin
+    response.headers['Access-Control-Allow-Methods'] = _allow_methods
+    response.headers['Access-Control-Allow-Headers'] = _allow_headers
+
+@route('/', method = 'OPTIONS')
+@route('/<path:path>', method = 'OPTIONS')
+def options_handler(path = None):
+    return
+
 
 @post('/')
 def index():
