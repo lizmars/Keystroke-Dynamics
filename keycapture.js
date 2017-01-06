@@ -59,7 +59,7 @@ function submit() {
     '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
 
         $.ajax({
-            url: 'http://127.0.0.1:8080',
+            url: 'http://107.170.249.133:8000',
             headers: {
                 'Type':'Create_Profile',
                 'User':username,
@@ -84,8 +84,9 @@ function submit() {
     keylog = [];
     timelog = [];
 
-    document.getElementById("keysrec").value = ""
-    document.getElementById("placehold").value = ""
+    document.getElementById("keysrec").value = "";
+    document.getElementById("Bar").style.width = 1 + "px";
+    document.getElementById("placehold").value = "";
   }
   else {
     alert("Enter some text first") //if texarea is empty
@@ -108,7 +109,7 @@ function auth(){
   param = '{ "' + username + '" : [' +
   '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
   $.ajax({
-      url: 'http://127.0.0.1:8080',
+      url: 'http://107.170.249.133:8000',
       headers: {
           'Type':'Auth',
           'User':username,
@@ -150,7 +151,7 @@ function checkname(){
 
  if(name){
    $.ajax({
-       url: 'http://127.0.0.1:8080',
+       url: 'http://107.170.249.133:8000',
        headers: {
            'Type':'is_in_DB',
            'User': name,
@@ -189,7 +190,7 @@ function checknameA(){
 
  if(name){
    $.ajax({
-       url: 'http://127.0.0.1:8080',
+       url: 'http://107.170.249.133:8000',
        headers: {
            'Type':'is_in_DB',
            'User': name,
