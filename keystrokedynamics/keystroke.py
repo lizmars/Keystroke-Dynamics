@@ -47,10 +47,10 @@ def createprofile():
 
             if profile.new_profile(postfile):
                 print "Profile Created"
-                return "True"
+                return Response("True", mimetype="text/plain")
             else:
                 print "Fail. Something gone wrong"
-                return "False"
+                return Response("False", mimetype="text/plain")
 
     return render_template('createprofile.html')
 
@@ -64,12 +64,20 @@ def auth():
 
         if " " in user:
             user.replace(" ", "_")
-        if typepost == "Auth":
+        if typepost == "is_in_DB":
+            print "Checkname Status for", user, ": ",
+            if checkname.is_record_exists(user):
+                print "Alredy Exist"
+                return Response("User Name Already Exist", mimetype="text/plain")
+            else:
+                print "New Name"
+                return Response("OK", mimetype="text/plain")
+        elif typepost == "Auth":
             postfile = typepost + "_" + user + "POST.json"
             with open(postfile, "w") as f:
                 f.write(json.dumps(postdata))
             print "Auth begin for ", user
-            return bioauth.start_auth(postfile)
+            return Response(bioauth.start_auth(postfile), mimetype="text/plain")
     return render_template('auth.html')
 
 @app.route('/contacts')
