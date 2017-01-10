@@ -1,5 +1,6 @@
 var keylog = [];
 var timelog = [];
+var url_k = 'http://localhost:5000'
 var username;
 
 function move(){
@@ -59,7 +60,7 @@ function submit() {
     '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
 
         $.ajax({
-            url: 'http://107.170.249.133:8000',
+            url: url_k,
             headers: {
                 'Type':'Create_Profile',
                 'User':username,
@@ -109,7 +110,7 @@ function auth(){
   param = '{ "' + username + '" : [' +
   '{ "Keys":"'+ keylog + '" , "Times":"' + timelog +'" }]}';
   $.ajax({
-      url: 'http://107.170.249.133:8000',
+      url: url_k,
       headers: {
           'Type':'Auth',
           'User':username,
@@ -151,7 +152,7 @@ function checkname(){
 
  if(name){
    $.ajax({
-       url: 'http://107.170.249.133:8000',
+       url: url_k,
        headers: {
            'Type':'is_in_DB',
            'User': name,
@@ -190,7 +191,7 @@ function checknameA(){
 
  if(name){
    $.ajax({
-       url: 'http://107.170.249.133:8000',
+       url: url_k,
        headers: {
            'Type':'is_in_DB',
            'User': name,

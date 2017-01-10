@@ -1,0 +1,35 @@
+#ex {
+    width: 770px;
+    height: 170px;
+    background-color: lightgrey;
+    margin: auto;
+    text-align: left;
+}
+p {
+  text-indent: 20px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0.3cm;
+  margin-right: 0.4cm;
+  color: #404040;
+}
+textarea {
+  width: 770px;
+  height: 180px;"
+}
+#Progress {
+    position: relative;
+    width: 770px;
+    height: 10px;
+    background-color: #b3b3b3;
+    margin: auto;
+
+}
+#Bar {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: green;
+    margin: auto;
+
+}

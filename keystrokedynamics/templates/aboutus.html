@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<title>Keystroke Dynamics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='addstyle.css') }}">
+
+
+<body style="background-color:rgb(200,200,200)">
+
+<div class="w3-container w3-blue-grey">
+  <div class="w3-btn-group w3-display-topright">
+    <a class="w3-btn w3-dark-grey " href="#">ENG</a>
+    <a class="w3-btn w3-disable " href="#">RU</a>
+    <a class="w3-btn w3-disable " href="#">UA</a>
+  </div>
+  <h1>Keystroke Dynamics</h1>
+</div>
+<div class="w3-container">
+    <ul class="w3-navbar w3-dark-grey">
+      {% for item in nav.top %}
+      <li class="{{ 'active' if item.is_active else '' }}">
+          <a href="{{ item.url }}">{{ item.label }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>
+
+  <div id="About" class="w3-container tab">
+    <h2>Coming soon...</h2>
+  </div>
+
+  <footer class="w3-container w3-blue-grey w3-center">
+    <p></p>
+  </footer>
+
+  </body>
+  </html>
