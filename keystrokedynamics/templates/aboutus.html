@@ -16,23 +16,23 @@
   </div>
   <h1>Keystroke Dynamics</h1>
 </div>
+
 <div class="w3-container">
-    <ul class="w3-navbar w3-dark-grey">
-      {% for item in nav.top %}
-      <li class="{{ 'active' if item.is_active else '' }}">
-          <a href="{{ item.url }}">{{ item.label }}</a>
-      </li>
-      {% endfor %}
-    </ul>
+  <ul class="w3-navbar w3-dark-grey">
+    {% for item in nav.top %}
+    <li class="{{ 'active' if item.is_active else '' }}">
+        <a href="{{ item.url }}">{{ item.label }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+<div id="About Us" class="w3-container tab">
+  <h2>Coming soon...</h2>
 </div>
 
-  <div id="About" class="w3-container tab">
-    <h2>Coming soon...</h2>
-  </div>
+<footer class="w3-container w3-blue-grey w3-center">
+  <p></p>
+</footer>
 
-  <footer class="w3-container w3-blue-grey w3-center">
-    <p></p>
-  </footer>
-
-  </body>
-  </html>
+</body>
+</html>
