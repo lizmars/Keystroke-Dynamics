@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<title>Keystroke Dynamics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='addstyle.css') }}">
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body style="background-color:rgb(200,200,200)">
+
+<div class="w3-container w3-blue-grey">
+  <div class="w3-btn-group w3-display-topright">
+    <a class="w3-btn w3-dark-grey " href="#">ENG</a>
+    <a class="w3-btn w3-disable " href="#">RU</a>
+    <a class="w3-btn w3-disable " href="#">UA</a>
+  </div>
+  <h1>Keystroke Dynamics</h1>
+</div>
+
+<div class="w3-container">
+  <ul class="w3-navbar w3-dark-grey">
+    {% for item in nav.top %}
+    <li class="{{ 'active' if item.is_active else '' }}">
+        <a href="{{ item.url }}">{{ item.label }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
+<div id="howitworks" class="w3-container tab w3-padding-8 w3-light-grey">
+  <h2>What is Keystroke Dynamics?</h2>
+  <h5>The behavioral biometric of Keystroke Dynamics uses the manner and
+    rhythm in which an individual types characters on a keyboard or keypad.
+    The keystroke rhythms of a user are measured to develop a unique biometric
+    template of the user's typing pattern for future authentication.
+    Raw measurements available from almost every keyboard can be recorded
+    to determine Dwell time (the time a key pressed) and Flight time (the
+    time between "key up" and the next "key down"). The recorded keystroke
+    timing data is then processed through a unique neural algorithm, which
+    determines a primary pattern for future comparison. Similarly,
+    vibration information may be used to create a pattern for future use
+    in both identification and authentication tasks.
+
+  </h5>
+  <h2>How it works?</h2>
+  <h5>
+    Keystroke dynamics analysis is fairly fast growing direction of research
+    that is due to need to ensure the security of a large park of applications
+    and adaptation to the changing technologies. In this project we proposed
+    keystroke dynamics user authentication method which uses (modified) method
+    of digraphs.
+  </h5>
+  <div class="w3-panel w3-center">
+    <img src= "{{ url_for('static',filename='dark_gray_new7.gif') }}"/></div>
+
+  <h5>In this case, it suggested the division of the keyboard keys on their
+  functional purpose. Each zone generates its own events (double and single)
+  which are analyzed separately. The final decision of authentication is made
+  on the basis of all the data from all functional areas of the keyboard.
+
+  For paired keyboard events is used   time parameters of digraphs(dwell and
+  flight time). This makes it possible to analyze  keystroke rhythms of a user.
+
+  This integrated approach allows to improve the accuracy of authentication
+   using keystroke dynamics without increasing the volume of data being processed.
+ </h5>
+
+
+  <footer class="w3-container w3-blue-grey w3-center">
+    <p></p>
+  </footer>
+
+  </body>
+  </html>
