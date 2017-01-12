@@ -12,7 +12,7 @@ nav.Bar('top', [
     nav.Item('Home', 'index'),
     nav.Item('Create Profile', 'createprofile'),
     nav.Item('Authentication', 'auth'),
-    nav.Item('Contact Us', 'contacts'),
+    nav.Item('How Keystroke Dynamics Works?', 'howitworks'),
     nav.Item('About Us', 'about'),
 ])
 
@@ -80,16 +80,16 @@ def auth():
             return Response(bioauth.start_auth(postfile), mimetype="text/plain")
     return render_template('auth.html')
 
-@app.route('/contacts')
-@cross_origin()
-def contacts():
-    return render_template('contacts.html')
 
 @app.route('/aboutus')
 @cross_origin()
 def about():
     return render_template('aboutus.html')
 
+@app.route('/howitworks')
+@cross_origin()
+def howitworks():
+    return render_template("howitworks.html")
 
 @app.route('/theend')
 @cross_origin()
