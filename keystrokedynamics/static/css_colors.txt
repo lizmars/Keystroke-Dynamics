@@ -1,0 +1,5 @@
+blue-gray: #607d8b
+dark-grey: #616161
+light-grey: #f1f1f1
+teal: #009688
+indigo: #3f51b5
