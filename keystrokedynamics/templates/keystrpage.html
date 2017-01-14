@@ -29,14 +29,14 @@
     {% endfor %}
   </ul>
 
-  <div id="Home" class="w3-container tab w3-padding-8 w3-light-grey">
+  <div id="Home" class="w3-container tab w3-padding-8 w3-light-grey ">
     <h2>About the Project and How To Start:</h2>
     <h4><b>Keystroke Dymanics</b> is a web application represent algorithm of authentication users via keystroke.
       This web applicarion has two important parts.
       <b>First part</b> creates your unique keystroke profile and store it on server (we named it "Create Profile").
       When you finished first part you'll be able to compare your live typing with submitted keystroke.
       Basically, <b>second part</b> is authentication. In this part application will try to recognize you.<h4>
-    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-large " style="width: 800px;margin:auto;">
       <h4>PART 1. Ready to try it out? Hit button below:</h4>
       <div class="w3-section">
         <p><a href="{{ url_for('createprofile') }}" class="w3-btn-block w3-hover-teal
@@ -53,10 +53,11 @@
     <div class="w3-container">
     <div class="w3-panel w3-border w3-sand w3-text-dark-grey w3-round-large">
       <h2>What is Keystroke Dynamics?</h2>
-      <h5><b>Keystroke dynamics</b>, keystroke biometrics or typing dynamics, is the
+      <h5><a href="https://en.wikipedia.org/wiki/Keystroke_dynamics"><b>Keystroke
+        dynamics</b>, keystroke biometrics or typing dynamics,</a> is the
         detailed timing information that describes exactly when each key was
         pressed and when it was released as a person is typing at a computer
-        keyboard.
+        keyboard. (<a href="https://en.wikipedia.org/wiki/Keystroke_dynamics">Wikipedia</a>)
       </h5>
       <h5>The behavioral biometric of Keystroke Dynamics uses the manner and
         rhythm in which an individual types characters on a keyboard or keypad.
@@ -69,7 +70,6 @@
     </div>
 
   </div>
-
 
 </div>
 
