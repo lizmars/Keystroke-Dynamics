@@ -1,4 +1,4 @@
-var url_k = 'http://162.243.145.18:80/auth'
+var url_k = 'http://localhost:5000/auth'
 var keylog = [];
 var timelog = [];
 var username;
@@ -21,10 +21,24 @@ function keyupAuth(){
 }
 
 function auth_next(){
-  document.getElementById("placehld").innerHTML = document.getElementById("userIDauth").value
-  document.getElementById("nextstep").disabled = true
-  document.getElementById("keyrec").focus();
+  if(document.getElementById("userIDauth").value.length != 0){
+    if(document.getElementById("name_status_Auth").style.color == "green"){
+      document.getElementById("AuthStep2").style.display = "block"
+      document.getElementById("placehld").innerHTML = document.getElementById("userIDauth").value
+      document.getElementById("nextstep").disabled = true
+      $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+      document.getElementById("keyrec").focus();
+    }
+    else{
+      alert("Please Chose Valid Name");
+    }
+  }
+  else{
+    alert("Enter username first");
+  }
+
 }
+
 function checknameA(){
  var name=document.getElementById( "userIDauth" ).value;
  if (document.getElementById( "userIDauth" ).value.length == 0){

@@ -1,4 +1,4 @@
-var url_k = 'http://162.243.145.18:80/createprofile'
+var url_k = 'http://localhost:5000/createprofile'
 var keylog = [];
 var timelog = [];
 var username;
@@ -67,10 +67,24 @@ function checkname(){
 }
 
 function cp_next(){
-  document.getElementById("placehold").innerHTML = document.getElementById("userID").value
-  document.getElementById("nexstep").disabled = true
-  document.getElementById("keysrec").focus();
+  if(document.getElementById("userID").value.length != 0){
+    if(document.getElementById("name_status").style.color == "green"){
+      document.getElementById("CPStep2").style.display = "block";
+      document.getElementById("keysrec").focus();
+      $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+      document.getElementById("placehold").innerHTML = document.getElementById("userID").value;
+      document.getElementById("nexstep").disabled = true;
+    }
+    else{
+      alert("Please Enter Different Name");
+    }
+
+  }
+  else{
+    alert("Enter username first");
+  }
 }
+
 
 function submit() {
   username = $("#placehold").text();
