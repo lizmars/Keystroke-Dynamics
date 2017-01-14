@@ -28,25 +28,25 @@
         </li>
         {% endfor %}
       </ul>
-  </div>
+
 
   <div id="Authentication" class="w3-container tab w3-center w3-padding-8 w3-light-grey">
     <div class="w3-panel w3-indigo w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
       <h1>Authentication</h1>
     </div>
-    <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
+    <form onsubmit="auth_next(); return false" class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
       <h3> Step 1. Enter username you created <h3>
       <h6><span id="name_status_Auth" ></span></h6>
       <input type="text" id="userIDauth" onkeyup="checknameA();" autofocus></input>
       <div class="w3-section">
-        <button id="nextstep" type="button"  onclick="auth_next();"
-        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled>Next Step</button>
+        <input id="nextstep" type="submit"  value="Next Step"
+        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled></button>
       </div>
-    </div>
+    </form>
 
   </div>
 
-  <div id="AuthStep2" class="w3-container tab w3-center w3-padding-8 w3-light-grey">
+  <div id="AuthStep2" class="w3-container tab w3-center w3-padding-8 w3-light-grey" hidden>
 
     <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 850px;margin:auto;">
       <h5> Authentication for <b><span id="placehld" style="color:blue"></span></b></h5>
@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
 <footer class="w3-container w3-blue-grey w3-center">
