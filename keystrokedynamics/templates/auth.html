@@ -31,16 +31,16 @@
 
 
   <div id="Authentication" class="w3-container tab w3-center w3-padding-8 w3-light-grey">
-    <div class="w3-panel w3-indigo w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-indigo w3-card-4 w3-round-xlarge" style="width: 80%;margin:auto;">
       <h1>Authentication</h1>
     </div>
-    <form onsubmit="auth_next(); return false" class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
+    <form onsubmit="auth_next(); return false" class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 80%;margin:auto;">
       <h3> Step 1. Enter username you created <h3>
       <h6><span id="name_status_Auth" ></span></h6>
       <input type="text" id="userIDauth" onkeyup="checknameA();" autofocus></input>
       <div class="w3-section">
         <input id="nextstep" type="submit"  value="Next Step"
-        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px" disabled></button>
+        class="w3-btn-block w3-dark-grey w3-round-large" style="width:20%" disabled></button>
       </div>
     </form>
 
@@ -48,7 +48,7 @@
 
   <div id="AuthStep2" class="w3-container tab w3-center w3-padding-8 w3-light-grey" hidden>
 
-    <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 850px;margin:auto;">
+    <div class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 80%;margin:auto;">
       <h5> Authentication for <b><span id="placehld" style="color:blue"></span></b></h5>
       <h3> Step 2. Type the phrase below.</h3>
       <h4>Start typing text below. Don't worry, small typo is ok</h4>
@@ -73,7 +73,7 @@
         <textarea id="keyrec" onkeydown="keydownAuth()" onkeyup="keyupAuth()" ></textarea>
         <h3><div id="result"  class="w3-panel w3-margin w3-opacity w3-round"></div><b></b></h3>
       <div class="w3-section">
-        <p><a href="{{ url_for('theend') }}" class="w3-btn-block w3-dark-grey w3-round-large" style="width:500px">I'm done</a></p>
+        <p><a href="{{ url_for('theend') }}" class="w3-btn-block w3-dark-grey w3-round-large" style="width:50%">I'm done</a></p>
 
       </div>
     </div>

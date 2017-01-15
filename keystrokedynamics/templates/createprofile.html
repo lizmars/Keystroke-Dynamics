@@ -30,25 +30,25 @@
 
 
   <div id="Create Profile" class="w3-container tab w3-center w3-padding-8 w3-light-grey">
-    <div class="w3-panel w3-teal w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-teal w3-card-4 w3-round-xlarge" style="width: 80%;margin:auto;">
       <h1>Keystroke Recorder</h1>
     </div>
 
-    <form onsubmit="cp_next(); return false;" class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 800px;margin:auto;">
+    <form onsubmit="cp_next(); return false;" class="w3-panel w3-center w3-light-grey w3-card-4" style="width: 80%;margin:auto;">
       <h3> Step 1. Create unique username<h3>
       <h4>Username:</h4>
       <h6><span id="name_status" ></span></h6>
       <input type="text" id="userID" onkeyup="checkname();"autofocus></input>
       <div class="w3-section">
         <input id="nexstep"  type="submit" value = "Next Step"
-        class="w3-btn-block w3-dark-grey w3-round-large" style="width:120px"></input>
+        class="w3-btn-block w3-dark-grey w3-round-large" style="width:20%"></input>
       </div>
     </form>
 
 
   <div id="CPStep2" class="w3-container tab w3-center w3-padding-8 w3-light-grey" hidden>
     <div class="w3-panel w3-center w3-light-grey w3-card-4"
-         style="width: 850px;margin:auto;">
+         style="width: 80%;margin:auto;">
       <h5> Hello, <b><span id="placehold" style="color:blue"></span></b>,
         please follow instructions below</h5>
       <h3> Step 2. Start typing the text below.</h3>
@@ -88,23 +88,23 @@
   </div>
   </div>
   <div id="CPEnd" class="w3-container tab w3-center w3-padding-8 w3-light-grey" hidden>
-    <div class="w3-panel w3-green w3-card-8 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-green w3-card-8 w3-round-xlarge" style="width: 80%;margin:auto;">
       <h1>SUCCESS</h1>
     </div>
-    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 80%;margin:auto;">
       <h4>Your keystroke profile now created. First part successfully finished.</h4>
       <h4>Ready to check authenticity of your live typing? Hit button below. </h4>
       <div class="w3-section">
         <p><a id="beginauth" href="{{ url_for('auth') }}" class="w3-btn-block w3-hover-indigo
-          w3-round-large" style="width:500px; margin: auto;">BEGIN AUTHENTIFICATION</a></p>
+          w3-round-large" style="width:50%; margin: auto;">BEGIN AUTHENTIFICATION</a></p>
       </div>
     </div>
   </div>
   <div id="CPError" class="w3-container tab w3-center w3-padding-8 w3-light-grey" hidden>
-    <div class="w3-panel w3-red w3-card-8 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-red w3-card-8 w3-round-xlarge" style="width: 80%;margin:auto;">
       <h1>Oops..</h1>
     </div>
-    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 800px;margin:auto;">
+    <div class="w3-panel w3-center w3-light-grey w3-card-4 w3-round-xlarge" style="width: 100%;margin:auto;">
       <h4>Something gone wrong. Profile is not complete.</h4>
       <h4>Please try again: </h4>
       <div class="w3-section">
