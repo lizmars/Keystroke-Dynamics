@@ -1,6 +1,10 @@
+"""Simple Flask API Server."""
+
 from flask import render_template
-from flask import request, Response
-from keystrokedynamics import app, nav, cross_origin
+from flask import request
+from flask import Response
+from keystrokedynamics import app
+from keystrokedynamics import nav
 
 import json
 
@@ -17,13 +21,11 @@ nav.Bar('top', [
 ])
 
 @app.route('/')
-@cross_origin()
 def index():
     return render_template('keystrpage.html')
 
 @app.route('/createprofile', methods=['GET', 'POST'])
-@cross_origin()
-def createprofile():
+def train_model():
     if request.method == 'POST':
         postdata = request.json
         user = request.headers["User"]
